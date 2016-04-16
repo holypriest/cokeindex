@@ -27,9 +27,10 @@ data = {
 }
 
 def main():
-    
+
     for key in data:
         print("%s\t\t\t%s" % (key.upper(), show_me_the_money(key)))
+        print("my ass")
 
 
 def fetch(url):
