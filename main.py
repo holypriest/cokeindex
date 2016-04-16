@@ -4,7 +4,7 @@
 import requests
 from bs4 import BeautifulSoup
 import re
-
+from money import Money
 data = {
     'pda' : {
         'selector': '#productForm > div.product-control__price.product-control__container > span.value.inline--middle',
@@ -27,13 +27,10 @@ data = {
 }
 
 def main():
+    
+    for key in data:
+        print("%s\t\t\t%s" % (key.upper(), show_me_the_money(key)))
 
-    selector, url = get_data('ardis')
-
-    content = fetch(url)
-    price = get_price(content, selector)
-
-    print(price)
 
 def fetch(url):
 
@@ -53,6 +50,13 @@ def get_data(key):
 def fix_price(price_str):
     price = re.sub(r',', '.', price_str)
     return float(re.sub(r'[^0-9\.]', '', price))
+
+def show_me_the_money(key):
+    selector, url = get_data(key)
+    price = get_price(fetch(url), selector)
+    currency = data[key]['currency']
+    m = Money(amount=price, currency=currency)
+    return m
 
 
 if __name__ == '__main__':
