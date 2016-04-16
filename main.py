@@ -34,7 +34,7 @@ def get_price(text, selector):
     soup = BeautifulSoup(text, 'html.parser')
     result = soup.select(selector)
 
-    return float(result[0].text.replace(',', '.'))
+    return float(fix_price(result[0].text))
 
 def get_data(key):
     return (data[key]['selector'], data[key]['url'])
