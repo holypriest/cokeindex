@@ -5,6 +5,9 @@ import requests
 from bs4 import BeautifulSoup
 import re
 from money import Money
+from config import CURRENCY_LAYER
+import json
+
 data = {
     'pda' : {
         'selector': '#productForm > div.product-control__price.product-control__container > span.value.inline--middle',
@@ -57,6 +60,16 @@ def show_me_the_money(key):
     m = Money(amount=price, currency=currency)
     return m
 
+def get_all_rates():
+    params= {
+        'access_key': CURRENCY_LAYER,
+        'format': 1,
+    }
+
+    r = requests.get("http://apilayer.net/api/live", params=params)
+    f = open('daily_rates.json','w')
+    f.write(r.text)
+    f.close()
 
 if __name__ == '__main__':
     main()
