@@ -17,7 +17,7 @@ data = {
         'country': 'brazil',
     },
     'ardis': {
-        'selector': '#main_container > section:nth-child(2) > div > div.span5 > div > div.price_block.line-dashed > p:nth-child(2) > span',
+        'selector': '#main_container > section > div > div.span5 > div > div.price_block.line-dashed > p > span',
         'url': 'http://www.ardis.dz/arproduit_detail.php?Id_Prod=10000086',
         'country': 'algeria',
     },
@@ -25,7 +25,7 @@ data = {
 
 def main():
 
-    selector, url = get_data('extra')
+    selector, url = get_data('ardis')
 
     content = fetch(url)
     price = get_price(content, selector)
