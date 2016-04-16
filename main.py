@@ -29,6 +29,8 @@ data = {
     },
 }
 
+DAILY_RATES_FILE = 'daily_rates.json'
+
 def main():
 
     for key in data:
@@ -67,9 +69,16 @@ def get_all_rates():
     }
 
     r = requests.get("http://apilayer.net/api/live", params=params)
-    f = open('daily_rates.json','w')
-    f.write(r.text)
-    f.close()
+    with open(DAILY_RATES_FILE,'w') as f:
+        f.write(r.text)
+
+
+def read_daily_rates():
+    with open(DAILY_RATES_FILE,'r') as f:
+         text = f.read()
+   
+    return json.loads(text)
+
 
 if __name__ == '__main__':
     main()
