@@ -34,7 +34,7 @@ DAILY_RATES_FILE = 'daily_rates.json'
 def main():
 
     for key in data:
-        print("%s\t\t\t%s" % (key.upper(), show_me_the_money(key)))
+        print("%s\t\t\t%s" % (key.upper(), display_price(key)))
 
 def fetch(url):
 
@@ -55,7 +55,7 @@ def fix_price(price_str):
     price = re.sub(r',', '.', price_str)
     return float(re.sub(r'[^0-9\.]', '', price))
 
-def show_me_the_money(key):
+def display_price(key):
     selector, url = get_data(key)
     price = get_price(fetch(url), selector)
     currency = data[key]['currency']
