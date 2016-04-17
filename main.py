@@ -72,13 +72,11 @@ def get_all_rates():
     with open(DAILY_RATES_FILE,'w') as f:
         f.write(r.text)
 
-
 def read_daily_rates():
     with open(DAILY_RATES_FILE,'r') as f:
          text = f.read()
-   
-    return json.loads(text)
 
+    return json.loads(text)
 
 if __name__ == '__main__':
     main()
