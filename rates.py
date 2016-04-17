@@ -1,3 +1,4 @@
+import requests
 from config import CURRENCY_LAYER
 import json
 

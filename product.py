@@ -2,6 +2,7 @@ from money import Money
 import requests
 from bs4 import BeautifulSoup
 import re
+from rates import *
 
 class Product(object):
 
@@ -36,3 +37,8 @@ class Product(object):
         currency = country.currency
         m = Money(amount=price, currency=currency)
         return m
+
+    def get_usd_price(self, rates):
+        rate = rates['quotes']['USD' + self._price.currency]
+        usd_price = float(self.price.amount) / rate
+        return Money(amount=usd_price, currency='USD')
