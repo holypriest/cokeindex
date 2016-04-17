@@ -1,12 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import requests
-from bs4 import BeautifulSoup
-import re
-from money import Money
-from config import CURRENCY_LAYER
-import json
+from seller import Seller
+from product import Product
+from country import Country
 
 data = {
     'pda' : {
@@ -29,54 +26,13 @@ data = {
     },
 }
 
-DAILY_RATES_FILE = 'daily_rates.json'
-
 def main():
 
     for key in data:
-        print("%s\t\t\t%s" % (key.upper(), display_price(key)))
-
-def fetch(url):
-
-    r = requests.get(url)
-    return r.text
-
-def get_price(text, selector):
-
-    soup = BeautifulSoup(text, 'html.parser')
-    result = soup.select(selector)
-
-    return float(fix_price(result[0].text))
-
-def get_data(key):
-    return (data[key]['selector'], data[key]['url'])
-
-def fix_price(price_str):
-    price = re.sub(r',', '.', price_str)
-    return float(re.sub(r'[^0-9\.]', '', price))
-
-def display_price(key):
-    selector, url = get_data(key)
-    price = get_price(fetch(url), selector)
-    currency = data[key]['currency']
-    m = Money(amount=price, currency=currency)
-    return m
-
-def get_all_rates():
-    params= {
-        'access_key': CURRENCY_LAYER,
-        'format': 1,
-    }
-
-    r = requests.get("http://apilayer.net/api/live", params=params)
-    with open(DAILY_RATES_FILE,'w') as f:
-        f.write(r.text)
-
-def read_daily_rates():
-    with open(DAILY_RATES_FILE,'r') as f:
-         text = f.read()
-
-    return json.loads(text)
+        c = Country(data[key]['country'], data[key]['currency'])
+        s = Seller(key, c)
+        p = Product(s, data[key]['selector'], data[key]['url'])
+        print("%s\t\t\t%s" % (s.name.upper(), p.price))
 
 if __name__ == '__main__':
     main()
