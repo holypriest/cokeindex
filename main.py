@@ -10,13 +10,13 @@ data = {
     'pda' : {
         'selector': '#productForm > div.product-control__price.product-control__container > span.value.inline--middle',
         'url': 'http://www.paodeacucar.com.br/produto/116609',
-        'country': 'brazil',
+        'country': 'Brazil',
         'currency': 'BRL',
     },
     'extra' : {
         'selector': '#prod_116609 > p',
         'url': 'http://www.deliveryextra.com.br/produto/116609/refrigerante-coca-cola-lata-350ml',
-        'country': 'brazil',
+        'country': 'Brazil',
         'currency': 'BRL',
     },
     'ardis': {
@@ -25,11 +25,16 @@ data = {
         'country': 'Algeria',
         'currency': 'DZD',
     },
+    'tesco': {
+        'selector': '#yui_3_13_0_1_1460938557136_343 > div.quantityWrapper > div > p.price > span.linePrice',
+        'url': 'http://www.tesco.com/groceries/product/details/?id=254855716',
+        'country': 'England',
+        'currency': 'GBP',
+    },
 }
 
 def main():
 
-    get_all_rates()
     rates = read_daily_rates()
 
     for key in data:

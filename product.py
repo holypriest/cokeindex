@@ -23,7 +23,6 @@ class Product(object):
     def get_price_str(self, text, selector):
         soup = BeautifulSoup(text, 'html.parser')
         result = soup.select(selector)
-
         return result[0].text
 
     def fix_price(self, price_str):
