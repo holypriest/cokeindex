@@ -26,7 +26,7 @@ data = {
         'currency': 'DZD',
     },
     'tesco': {
-        'selector': '#yui_3_13_0_1_1460938557136_343 > div.quantityWrapper > div > p.price > span.linePrice',
+        'selector': 'div.quantityWrapper > div > p.price > span.linePrice',
         'url': 'http://www.tesco.com/groceries/product/details/?id=254855716',
         'country': 'England',
         'currency': 'GBP',
@@ -41,7 +41,8 @@ def main():
         c = Country(data[key]['country'], data[key]['currency'])
         s = Seller(key, c)
         p = Product(s, data[key]['selector'], data[key]['url'])
-        print("%s\t\t\t%s" % (s.name.upper(), p.get_usd_price(rates)))
+        print("%s\t\t\t%s\t\t\t%s" % (s.name.upper(), c.name.upper(),
+                                      p.get_usd_price(rates)))
 
 if __name__ == '__main__':
     main()
