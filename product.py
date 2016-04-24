@@ -1,7 +1,9 @@
-from money import Money
+import re
+
 import requests
 from bs4 import BeautifulSoup
-import re
+
+from money import Money
 
 
 class Product(object):

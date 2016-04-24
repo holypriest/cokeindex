@@ -8,13 +8,13 @@ from rates import set_rates
 
 
 data = {
-    'pda' : {
+    'pda': {
         'selector': '#productForm > div.product-control__price.product-control__container > span.value.inline--middle',
         'url': 'http://www.paodeacucar.com.br/produto/116609',
         'country': 'Brazil',
         'currency': 'BRL',
     },
-    'extra' : {
+    'extra': {
         'selector': '#prod_116609 > p',
         'url': 'http://www.deliveryextra.com.br/produto/116609/refrigerante-coca-cola-lata-350ml',
         'country': 'Brazil',
