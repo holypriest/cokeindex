@@ -4,7 +4,8 @@
 from seller import Seller
 from product import Product
 from country import Country
-from rates import *
+from rates import set_rates
+
 
 data = {
     'pda' : {
@@ -33,16 +34,18 @@ data = {
     },
 }
 
+
 def main():
 
-    rates = read_daily_rates()
+    set_rates()
 
     for key in data:
         c = Country(data[key]['country'], data[key]['currency'])
         s = Seller(key, c)
         p = Product(s, data[key]['selector'], data[key]['url'])
         print("%s\t\t\t%s\t\t\t%s" % (s.name.upper(), c.name.upper(),
-                                      p.get_usd_price(rates)))
+                                      p.get_usd_price()))
+
 
 if __name__ == '__main__':
     main()
